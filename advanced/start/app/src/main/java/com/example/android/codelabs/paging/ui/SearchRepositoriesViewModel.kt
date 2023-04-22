@@ -147,21 +147,20 @@ sealed class UiAction {
     data class Scroll(val currentQuery: String) : UiAction()
 }
 
-sealed class UiModel {
-    data class RepoItem(val repo: Repo) : UiModel()
-    data class SeparatorItem(val description: String) : UiModel()
-}
-
 data class UiState(
     val query: String = DEFAULT_QUERY,
     val lastQueryScrolled: String = DEFAULT_QUERY,
     val hasNotScrolledForCurrentSearch: Boolean = false
 )
 
+sealed class UiModel {
+    data class RepoItem(val repo: Repo) : UiModel()
+    data class SeparatorItem(val description: String) : UiModel()
+}
+
 private val UiModel.RepoItem.roundedStarCount: Int
     get() = this.repo.stars / 10_000
 
-private const val VISIBLE_THRESHOLD = 5
-private const val LAST_SEARCH_QUERY: String = "last_search_query"
 private const val LAST_QUERY_SCROLLED: String = "last_query_scrolled"
+private const val LAST_SEARCH_QUERY: String = "last_search_query"
 private const val DEFAULT_QUERY = "Android"
